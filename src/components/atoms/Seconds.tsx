@@ -1,12 +1,11 @@
 import React from "react";
 
 interface Props {
-  name: string;
-  time: number;
-  setTime: React.Dispatch<React.SetStateAction<number>>;
+  s: number;
+  setS: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Seconds:React.FC<Props> = ({name, time, setTime}) => {
+const Seconds: React.FC<Props> = ({ s, setS }) => {
   const seconds = [
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
     21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
@@ -15,14 +14,14 @@ const Seconds:React.FC<Props> = ({name, time, setTime}) => {
   ];
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = Number(event.target.value);
-    setTime(value);
+    setS(value);
   };
   return (
     <div className="col-span-3">
-      <p className="font-bold text-xl">{name}</p>
+      <p className="font-bold text-xl">Seconds</p>
       <select
-      value={time}
-      onChange={selectChange}
+        value={s}
+        onChange={selectChange}
         className="form-select appearance-none cursor-pointer font-bold text-xl block w-full px-3 py-1.5 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700
                              focus:bg-white focus:border-black focus:outline-none"
         aria-label="Default select example"

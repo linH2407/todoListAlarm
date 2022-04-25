@@ -6,24 +6,26 @@
   body {
     @apply max-w-7xl mx-auto box-border font-mon;
   }
-
 }
 ::-webkit-scrollbar {
   width: 8px;
 }
 
-/* Track */
-/* ::-webkit-scrollbar-track {
-  border-radius: 10px;
-} */
- 
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #7992C4; 
+  background: #7992c4;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background:#7992C4; 
+  background: #7992c4;
+}
+
+#toggle-switch::after {
+  content: "";
+  @apply w-[16px] h-[16px] rounded-full bg-[#7992C4] absolute left-0 top-0 transition duration-200;
+}
+
+#toggle-switch:checked::after {
+  @apply translate-x-4  w-[16px] h-[16px] rounded-full bg-white;
 }

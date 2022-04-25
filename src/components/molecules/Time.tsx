@@ -1,21 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import Colon from "../atoms/Colon";
 import Hours from "../atoms/Hours";
+import Minutes from "../atoms/Minutes";
 import Seconds from "../atoms/Seconds";
 
-interface Props {
-  time: number;
-  setTime: React.Dispatch<React.SetStateAction<number>>;
-}
 
-const Time:React.FC<Props> = ({time, setTime}) => {
+interface Props {
+  h: number;
+  setH: React.Dispatch<React.SetStateAction<number>>;
+  m: number;
+  setM: React.Dispatch<React.SetStateAction<number>>;
+  s: number;
+  setS: React.Dispatch<React.SetStateAction<number>>;
+}
+const Time: React.FC<Props> = ({h, setH, m, setM, s, setS}) => {
+  const [todo, setTodo] = useState([]);
+
   return (
     <div className="grid grid-cols-11 py-4  ">
-      <Hours time={time} setTime={setTime}/>
+      <Hours h={h} setH={setH}/>
       <Colon />
-      <Seconds name="Minutes" time={time} setTime={setTime}/>
+      <Minutes  m={m} setM={setM}/>
       <Colon />
-      <Seconds name="Seconds" time={time} setTime={setTime}/>
+      <Seconds  s={s} setS={setS}/>
     </div>
   );
 };
