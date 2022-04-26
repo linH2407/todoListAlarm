@@ -5,6 +5,12 @@ module.exports = {
       fontFamily: {
         mon: ["Montserrat", "sans-serif"],
       },
+     
+    },
+  },
+  variants: {
+    extend: {
+      backgroundColor: ["checked"],
     },
   },
   plugins: [],

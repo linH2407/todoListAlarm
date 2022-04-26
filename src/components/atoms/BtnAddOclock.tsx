@@ -1,5 +1,5 @@
 import React from "react";
-import add from "../atoms/add.svg";
+import add from "../atoms/image/add.svg";
 
 interface Props {
   showModal: boolean,
