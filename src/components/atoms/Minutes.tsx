@@ -17,7 +17,7 @@ const Minutes: React.FC<Props> = ({ m, setM }) => {
   };
   return (
     <div className="col-span-3">
-      <p className="font-bold text-xl">Seconds</p>
+      <p className="font-bold text-xl">Minutes</p>
       <select
         value={m}
         onChange={selectChange}

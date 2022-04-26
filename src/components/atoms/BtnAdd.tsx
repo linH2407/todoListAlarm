@@ -41,7 +41,7 @@ const BtnAdd: React.FC<Props> = ({
     setH(h);
     setM(m);
     setS(s);
-   
+  //  setTodos(prev => [...,{h:h, m:m,s:s}])
   };
  
   return (

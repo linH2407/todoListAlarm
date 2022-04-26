@@ -36,6 +36,7 @@ const Todo:React.FC<Props> = ({h, setH, m, setM, s, setS, time}) => {
       </div>
     </div>
   );
+  
 };
 
 export default Todo;

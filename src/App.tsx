@@ -68,8 +68,6 @@ const App: React.FC = () => {
         )}
 
         {/* {todos.map((todo, index) => (
-          ))} */}
-        {showTodo && (
           <Todo
             h={h}
             setH={setH}
@@ -81,7 +79,19 @@ const App: React.FC = () => {
             // setTodos={setTodos}
             time={time}
           />
-        )}
+        ))} */}
+        {showTodo && (
+          <Todo
+            h={h}
+            setH={setH}
+            m={m}
+            setM={setM}
+            s={s}
+            setS={setS}
+            // todos={todos}
+            // setTodos={setTodos}
+            time={time}
+          />)}
       </div>
     </div>
   );
