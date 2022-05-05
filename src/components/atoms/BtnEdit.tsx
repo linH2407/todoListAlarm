@@ -1,6 +1,10 @@
 import React from 'react'
 
-const BtnEdit = () => {
+interface Props {
+  handleEdit: () => void;
+}
+
+const BtnEdit:React.FC<Props> = ({handleEdit}) => {
   return (
     <div className=" pb-4 ">
     <button

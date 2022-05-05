@@ -1,44 +1,27 @@
 import React, { useState } from "react";
 import BtnAdd from "../atoms/BtnAdd";
 import BtnEdit from "../atoms/BtnEdit";
+import Colon from "../atoms/Colon";
+import Hours from "../atoms/Hours";
+import Minutes from "../atoms/Minutes";
 import Music from "../atoms/Music";
-import Time from "../molecules/Time";
+import Seconds from "../atoms/Seconds";
 
 interface Props {
-  showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  showEmptyTodo: boolean;
   setShowEmptyTodo: React.Dispatch<React.SetStateAction<boolean>>;
-  showTodo: boolean;
-  setShowTodo: React.Dispatch<React.SetStateAction<boolean>>;
-  h: number;
-  setH: React.Dispatch<React.SetStateAction<number>>;
-  m: number;
-  setM: React.Dispatch<React.SetStateAction<number>>;
-  s: number;
-  setS: React.Dispatch<React.SetStateAction<number>>;
-  todos: never[];
-  setTodos: React.Dispatch<React.SetStateAction<never[]>>;
-  time: String;
+  createTime: (data: { h: number; m: number; s: number }) => void;
 }
 
 const Modal: React.FC<Props> = ({
-  showModal,
   setShowModal,
-  showEmptyTodo,
+  createTime,
   setShowEmptyTodo,
-  showTodo,
-  setShowTodo,
-  h,
-  setH,
-  m,
-  setM,
-  s,
-  setS,
-  todos,
-  setTodos,
-  time,
 }) => {
+  const [h, setH] = useState(0);
+  const [m, setM] = useState(0);
+  const [s, setS] = useState(0);
+
   return (
     <div className=" bg-black absolute inset-0  bg-opacity-40  z-40">
       <div className="bg-white max-w-4xl mx-auto mt-[200px] rounded-b-md drop-shadow-md">
@@ -51,31 +34,34 @@ const Modal: React.FC<Props> = ({
         </div>
         <div className="px-8 pt-10">
           <div>
+            <div>
+              <p className="text-[14px] text-[#8E8E8E] mb-[-8px]">Thời gian</p>
 
-            <Time h={h} setH={setH} m={m} setM={setM} s={s} setS={setS} />
+              <div className="grid grid-cols-11 py-4  ">
+                <Hours h={h} setH={setH} />
+                <Colon />
+                <Minutes m={m} setM={setM} />
+                <Colon />
+                <Seconds s={s} setS={setS} />
+              </div>
+            </div>
           </div>
-          <Music/>
-          
+          <Music />
         </div>
         <div className="flex flex-row-reverse gap-4">
           <BtnAdd
-            showModal={showModal}
-            setShowModal={setShowModal}
-            showEmptyTodo={showEmptyTodo}
-            setShowEmptyTodo={setShowEmptyTodo}
-            showTodo={showTodo}
-            setShowTodo={setShowTodo}
-            h={h}
-            setH={setH}
-            m={m}
-            setM={setM}
-            s={s}
-            setS={setS}
-            todos={todos}
-            setTodos={setTodos}
-            time={time}
-          />
-          <BtnEdit/>
+            handleClick={() => {
+              createTime({
+                h,
+                m,
+                s,
+              });
+              setShowEmptyTodo(false);
+            }}
+          >
+            Thêm
+          </BtnAdd>
+          <BtnEdit handleEdit={() => {}} />
         </div>
       </div>
     </div>

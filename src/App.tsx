@@ -1,22 +1,25 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import BtnAddOclock from "./components/atoms/BtnAddOclock";
 import GetTime from "./components/atoms/GetTime";
 import img1 from "./components/atoms/image/img1.png";
-import Todo from "./components/molecules/Todo";
+import Todo, { TodoData } from "./components/molecules/Todo";
 import Modal from "./components/organisms/Modal";
 
 const App: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [showEmptyTodo, setShowEmptyTodo] = useState(true);
-  const [showTodo, setShowTodo] = useState(false);
+  const [showAlarm, setShowAlarm] = useState(true);
 
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<TodoData[]>([]);
 
-  const [h, setH] = useState(0);
-  const [m, setM] = useState(0);
-  const [s, setS] = useState(0);
+  const addTime = useCallback(
+    ({ h, m, s }: { h: number; m: number; s: number }) => {
+      setTodos((state) => [...state, {id:Date.now(), h, m, s, active: false }]);
+      setShowModal(false);
+    },
+    [setTodos]
+  );
 
-  const time = h + ":" + m + ":" + s;
   return (
     <div>
       <div>
@@ -36,25 +39,14 @@ const App: React.FC = () => {
 
             {showModal && (
               <Modal
-                showModal={showModal}
                 setShowModal={setShowModal}
-                showEmptyTodo={showEmptyTodo}
+                createTime={addTime}
                 setShowEmptyTodo={setShowEmptyTodo}
-                showTodo={showTodo}
-                setShowTodo={setShowTodo}
-                h={h}
-                setH={setH}
-                m={m}
-                setM={setM}
-                s={s}
-                setS={setS}
-                time={time}
-                todos={todos}
-                setTodos={setTodos}
               />
             )}
           </div>
         </div>
+
         {showEmptyTodo && (
           <div>
             <div className="mt-16">
@@ -67,31 +59,24 @@ const App: React.FC = () => {
           </div>
         )}
 
-        {/* {todos.map((todo, index) => (
+        {todos.map((todo, index) => (
           <Todo
-            h={h}
-            setH={setH}
-            m={m}
-            setM={setM}
-            s={s}
-            setS={setS}
-            // todos={todos}
-            // setTodos={setTodos}
-            time={time}
-          />
-        ))} */}
-        {showTodo && (
-          <Todo
-            h={h}
-            setH={setH}
-            m={m}
-            setM={setM}
-            s={s}
-            setS={setS}
-            // todos={todos}
-            // setTodos={setTodos}
-            time={time}
-          />)}
+            key={index}
+            h={todo.h}
+            m={todo.m}
+            s={todo.s}
+            active={todo.active}
+            updateActive={(active) => {
+              setTodos((state) => {
+                state[index].active = active;
+                return [...state];
+              });
+            }}
+            id={todo.id}
+            todos={todos}
+            setTodos={setTodos}
+            />
+        ))}
       </div>
     </div>
   );
